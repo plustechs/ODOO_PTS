@@ -1,0 +1,9 @@
+## GITIGNORE for ODOO ##
+############################
+
+gitignore_odoo = """
+*.pyc
+*.pyo
+*.pyd
+
+.history
