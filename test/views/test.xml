@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
   <data>
-    <!-- explicit list view definition -->
-    
-    
-    <!-- actions opening views on models -->
+    <!-- Top menu item -->
+    <menuitem id="test_menu_root" name="Test Menu Root" web_icon="fa-cogs" active="true" sequence="10"/>
 
     <!-- server action to the one above -->
-
-    <!-- Top menu item -->
+  
+    <!-- explicit list view definition -->
+    
+    <!-- actions opening views on models -->
     
     <!-- menu categories -->
     
