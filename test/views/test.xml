@@ -2,17 +2,31 @@
 <odoo>
   <data>
     <!-- Top menu item -->
-    <menuitem id="test_menu_root" name="Test Menu Root" web_icon="fa-cogs" active="true" sequence="10"/>
+    <menuitem id="test_menu_root" name="Test Menu Root" web_icon="fa-cogs" active="true" sequence="10" />
 
     <!-- server action to the one above -->
-  
+
     <!-- explicit list view definition -->
-    
+
     <!-- actions opening views on models -->
-    
+    <record model="ir.actions.act_window" id="test_action_1">
+      <field name="name">Test Action 1</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">test.model</field>
+      <field name="view_mode">kanban,form</field>
+      <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+          <img src="/web/static/src/img/smiling_face.png" alt="" />
+          <span>
+            This is a test action.
+          </span>
+        </p>
+      </field>
+    </record>
+
     <!-- menu categories -->
-    
+
     <!-- actions -->
-    
+
   </data>
 </odoo>
