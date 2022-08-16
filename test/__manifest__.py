@@ -23,7 +23,8 @@
     'version': '0.42',
 
     # any module necessary for this one to work correctly
-    'depends': ['base'],
+    # account, contacts, l10n_pe_edi, l10n_pe_edi_stock
+    'depends': ['base', 'account', 'contacts', 'l10n_pe_edi', 'l10n_pe_edi_stock'],
 
     # always loaded
     'data': [
