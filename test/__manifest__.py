@@ -2,9 +2,9 @@
 {
     'name': "RUC fetch",
 
-    'summary': """Get info from RUC and complete the form""",
+    'summary': "Get info from RUC and complete the form",
 
-    'description': """Get info from RUC and complete the form""",
+    'description': "Get info from RUC and complete the form",
 
     'author': "Plustechs",
     'website': "http://www.plustechs.com",
