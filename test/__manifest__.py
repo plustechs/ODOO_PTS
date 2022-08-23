@@ -1,14 +1,10 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "test",
+    'name': "RUC fetch",
 
-    'summary': """
-        Test module for Odoo
-        """,
+    'summary': """Get info from RUC and complete the form""",
 
-    'description': """
-        Test module for Odoo
-    """,
+    'description': """Get info from RUC and complete the form""",
 
     'author': "Plustechs",
     'website': "http://www.plustechs.com",
@@ -19,6 +15,7 @@
     # for the full list
     'application': True,
     'installable': True,
+    'auto_install': False,
     'category': 'Productivity',
     'version': '0.42',
 
