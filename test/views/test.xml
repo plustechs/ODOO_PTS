@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-  <data>
-    <!-- Top menu item -->
-    <menuitem id="test_menu_root" name="Test Menu Root" web_icon="fa-cogs" active="true" sequence="10" />
+  <!-- 
+  <data> -->
+  <!-- Top menu item -->
+  <!-- 
+    <menuitem id="test_menu_root" name="Test Menu Root" web_icon="fa-cogs" active="true" sequence="10" /> -->
 
-    <!-- server action to the one above -->
+  <!-- server action to the one above -->
 
-    <!-- explicit list view definition -->
+  <!-- explicit list view definition -->
 
-    <!-- actions opening views on models -->
-    <record model="ir.actions.act_window" id="test_action_1">
+  <!-- actions opening views on models -->
+  <!--     <record model="ir.actions.act_window" id="test_action_1">
       <field name="name">Test Action 1</field>
       <field name="type">ir.actions.act_window</field>
       <field name="res_model">test.model</field>
@@ -22,11 +24,11 @@
           </span>
         </p>
       </field>
-    </record>
+    </record> -->
 
-    <!-- menu categories -->
+  <!-- menu categories -->
 
-    <!-- actions -->
-
-  </data>
+  <!-- actions -->
+  <!-- 
+  </data> -->
 </odoo>

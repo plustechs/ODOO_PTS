@@ -15,8 +15,9 @@ class ResPartner(models.Model):
 
     @api.depends('vat', 'l10n_latam_identification_type_id')
     def _get_ruc(self):
+        _url_temp = url_base + self.vat
         response = requests.post(
-            url_base, data=json.dumps(json_data), headers=headers)
+            _url_temp, data=json.dumps(json_data), headers=headers)
         print(json.dumps(response.json(), indent=4, sort_keys=True))
 
     """@api.constrains('vat', 'l10n_latam_identification_type_id')
