@@ -8,7 +8,7 @@ import requests
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
-    @api.onchange('vat')
+    @api.depends('vat')
     def _get_ruc(self):
         _headers = {"Content-Type": "application/json",
                     "Accept": "application/json", "Catch-Control": "no-cache"}
