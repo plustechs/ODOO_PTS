@@ -15,6 +15,7 @@ class ResPartner(models.Model):
         _url_base = "http://54.202.22.62:8080/padron-sunat/ec/gebr/"
         _json_data = {}
         _url_temp = _url_base + self.vat
+        print(_url_temp)
         response = requests.post(
             _url_temp, data=json.dumps(_json_data), headers=_headers)
         print(json.dumps(response.json(), indent=4, sort_keys=True))
