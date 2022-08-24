@@ -18,6 +18,8 @@ class ResPartner(models.Model):
         response = requests.post(
             _url_temp, data=json.dumps(_json_data), headers=_headers)
         print(json.dumps(response.json(), indent=4, sort_keys=True))
+        self.name = response.json()['data'].get('nombreRazonSocial')
+        self.street = response.json()['data'].get('nombreVia')
 
 
 """     @api.onchange('country_id')
