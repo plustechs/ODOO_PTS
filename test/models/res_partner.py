@@ -14,7 +14,8 @@ class ResPartner(models.Model):
                     "Accept": "application/json", "Catch-Control": "no-cache"}
         _url_base = "http://54.202.22.62:8080/padron-sunat/ec/gebr/20100070970"
         _json_data = {}
-        _url_temp = _url_base + self.env['res.partner'].vat
+        _url_temp = _url_base + \
+            super(ResPartner, self.env['res.partner'])._get_ruc()
         response = requests.post(
             _url_temp, data=json.dumps(_json_data), headers=_headers)
         print(json.dumps(response.json(), indent=4, sort_keys=True))
