@@ -12,7 +12,7 @@ class ResPartner(models.Model):
     def _get_ruc(self):
         _headers = {"Content-Type": "application/json",
                     "Accept": "application/json", "Catch-Control": "no-cache"}
-        _url_base = "http://54.202.22.62:8080/padron-sunat/ec/gebr/20100070970"
+        _url_base = "http://54.202.22.62:8080/padron-sunat/ec/gebr/"
         _json_data = {}
         _url_temp = _url_base + \
             super(ResPartner, self.env['res.partner'])._get_ruc()
