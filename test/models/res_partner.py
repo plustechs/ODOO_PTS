@@ -6,7 +6,7 @@ import requests
 
 
 class ResPartner(models.Model):
-    _inherit = 'res.partner'
+    _inherit = 'l10n_pe.res.partner'
 
     @api.depends('vat')
     def _get_ruc(self):
