@@ -1,14 +1,10 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "test",
+    'name': "RUC fetch",
 
-    'summary': """
-        Test module for Odoo
-        """,
+    'summary': "Get info from RUC and complete the form",
 
-    'description': """
-        Test module for Odoo
-    """,
+    'description': "Get info from RUC and complete the form",
 
     'author': "Plustechs",
     'website': "http://www.plustechs.com",
@@ -19,11 +15,13 @@
     # for the full list
     'application': True,
     'installable': True,
+    'auto_install': False,
     'category': 'Productivity',
     'version': '0.42',
 
     # any module necessary for this one to work correctly
-    'depends': ['base'],
+    # account, contacts, l10n_pe_edi, l10n_pe_edi_stock
+    'depends': ['base', 'account', 'contacts', 'l10n_pe_edi', 'l10n_pe_edi_stock', 'stock'],
 
     # always loaded
     'data': [
