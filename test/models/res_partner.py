@@ -7,7 +7,7 @@ import requests
 
 class ResPartner(models.Model):
     #inherit the model res.partner from l10n_latam_base
-    _inherit =  'res_partner'
+    _inherit =  'res.partner'
 
     @api.depends('vat')
     def _get_ruc(self):
