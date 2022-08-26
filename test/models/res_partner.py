@@ -19,13 +19,12 @@ class ResPartner(models.Model):
         response = requests.post(
             _url_temp, data=json.dumps(_json_data), headers=_headers)
         print(json.dumps(response.json(), indent=4, sort_keys=True))
-        self.env['res.partner'].browse(self.name).write(
-            {response.json()['data'].get('nombreRazonSocial')})
-        self.env['res.partner'].browse(self.name).write(
-            {response.json()['data'].get('nombreVia')})
+        if response.status_code == 200:
+            self.env['res.partner'].search([('vat', '=', self.vat)]).write(
+                {'vat': response.json()['ruc']})
+
         # update self with the new values
         #self.write({'name': self.name, 'street': self.street})
-        return True
 
 
 """     @api.onchange('country_id')
