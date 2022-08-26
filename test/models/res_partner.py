@@ -21,7 +21,7 @@ class ResPartner(models.Model):
         print(json.dumps(response.json(), indent=4, sort_keys=True))
         if response.status_code == 200:
             self.env['res.partner'].search([('vat', '=', self.vat)]).write(
-                {'vat': response.json()['ruc']})
+                {'name': response.json().get('nombreRazonSocial')})
 
         # update self with the new values
         #self.write({'name': self.name, 'street': self.street})
