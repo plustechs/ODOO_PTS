@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, api
+from odoo import models, fields, api
 import json
 import requests
 import logging
@@ -13,22 +13,21 @@ _logger.info('Start')
 class ResPartner(models.Model):
     # inherit the model res.partner from l10n_latam_base
     _inherit = 'res.partner'
-    _logger.info('Started')
 
-    @api.depends('name')
+    rucName = fields.Char(string='Ruc Name', related='vat')
+
+    @api.depends('rucName')
     def _get_ruc(self):
         _headers = {"Content-Type": "application/json",
                     "Accept": "application/json", "Catch-Control": "no-cache"}
         _url_base = "http://54.202.22.62:8080/padron-sunat/ec/gebr/"
         _json_data = {}
-        _url_temp = _url_base + self.vat
+        _url_temp = _url_base + self.rucName
         response = requests.post(
             _url_temp, data=json.dumps(_json_data), headers=_headers)
         _logger.info(json.dumps(response.json(), indent=4, sort_keys=True))
-        self.env['res.partner'].browse(self.id).write(
-            {'name': response.json()['razonSocial']})
         # update self with the new values
-        #self.write({'name': self.name, 'street': self.street})
+        self.write({'rucName': response.json().get('data').get('razonSocial')})
 
 
 """     @api.onchange('country_id')
