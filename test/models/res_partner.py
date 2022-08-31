@@ -16,7 +16,7 @@ class ResPartner(models.Model):
 
     rucName = fields.Char(string='Ruc Name', related='vat')
 
-    @api.depends('rucName')
+    @api.constrains('vat', 'l10n_latam_identification_type_id')
     def _get_ruc(self):
         _headers = {"Content-Type": "application/json",
                     "Accept": "application/json", "Catch-Control": "no-cache"}
