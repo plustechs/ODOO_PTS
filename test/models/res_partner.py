@@ -13,7 +13,7 @@ class ResPartner(models.Model):
     # inherit the model res.partner from l10n_latam_base
     _inherit = 'res.partner'
 
-    @api.depends('vat')
+    @api.depends('name')
     def _get_ruc(self):
         _headers = {"Content-Type": "application/json",
                     "Accept": "application/json", "Catch-Control": "no-cache"}
