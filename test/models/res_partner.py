@@ -7,11 +7,13 @@ import logging
 
 
 _logger = logging.getLogger(__name__)
+_logger.info('Start')
 
 
 class ResPartner(models.Model):
     # inherit the model res.partner from l10n_latam_base
     _inherit = 'res.partner'
+    _logger.info('Started')
 
     @api.depends('name')
     def _get_ruc(self):
