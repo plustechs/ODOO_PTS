@@ -3,6 +3,10 @@
 from odoo import models, api
 import json
 import requests
+import logging
+
+
+_logger = logging.getLogger(__name__)
 
 
 class ResPartner(models.Model):
@@ -18,10 +22,9 @@ class ResPartner(models.Model):
         _url_temp = _url_base + self.vat
         response = requests.post(
             _url_temp, data=json.dumps(_json_data), headers=_headers)
-        print(json.dumps(response.json(), indent=4, sort_keys=True))
-        self.env['res.partner'].search([('vat', '=', self.vat)]).write(
-            {'name': response.json().get('nombreRazonSocial')})
-
+        _logger.info(json.dumps(response.json(), indent=4, sort_keys=True))
+        self.env['res.partner'].browse(self.id).write(
+            {'name': response.json()['razonSocial']})
         # update self with the new values
         #self.write({'name': self.name, 'street': self.street})
 
