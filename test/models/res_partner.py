@@ -26,8 +26,11 @@ class ResPartner(models.Model):
         response = requests.post(
             _url_temp, data=json.dumps(_json_data), headers=_headers)
         _logger.info(json.dumps(response.json(), indent=4, sort_keys=True))
-        # update self with the new values
-        self.write({'name': response.json().get('data').get('razonSocial')})
+        # update self.name with response.data.name
+        _logger.info(self.name)
+        self.name = response.json()['data']['nombreRazonSocial']
+        #write the response in the log
+        _logger.info(self.name)
 
 
 """     @api.onchange('country_id')
