@@ -28,7 +28,9 @@ class ResPartner(models.Model):
         _logger.info(json.dumps(response.json(), indent=4, sort_keys=True))
         # update self.name with response.data.name
         _logger.info(self.name)
-        self.name = response.json()['data']['nombreRazonSocial']
+        if response.json()['data'] is not None:
+            self.name = response.json()['data']['nombreRazonSocial']
+            self.street_name = response.json()['data']['nombreVia']
         #write the response in the log
         _logger.info(self.name)
 
