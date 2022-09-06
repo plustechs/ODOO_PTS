@@ -16,18 +16,18 @@ class ResPartner(models.Model):
 
     rucName = fields.Char(string='Ruc Name', related='vat')
 
-    @api.depends('rucName')
+    @api.constrains('vat')
     def _get_ruc(self):
         _headers = {"Content-Type": "application/json",
                     "Accept": "application/json", "Catch-Control": "no-cache"}
-        _url_base = "http://54.202.22.62:8080/padron-sunat/ec/gebr/"
+        _url_base = "http://35.90.30.141:8080/padron-sunat/ec/gebr/"
         _json_data = {}
         _url_temp = _url_base + self.rucName
         response = requests.post(
             _url_temp, data=json.dumps(_json_data), headers=_headers)
         _logger.info(json.dumps(response.json(), indent=4, sort_keys=True))
         # update self with the new values
-        self.write({'rucName': response.json().get('data').get('razonSocial')})
+        self.write({'name': response.json().get('data').get('razonSocial')})
 
 
 """     @api.onchange('country_id')
