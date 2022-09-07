@@ -30,7 +30,8 @@ class ResPartner(models.Model):
         _logger.info(self.name)
         if response.json()['data'] is not None:
             self.name = response.json()['data']['nombreRazonSocial']
-            self.street_name = response.json()['data']['nombreVia']
+            self.street_name = response.json()['data']['nombreVia'] + ' ' + response.json()['data']['numeroVia']
+            self.env.cr.commit()
         #write the response in the log
         _logger.info(self.name)
 
