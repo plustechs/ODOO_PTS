@@ -16,7 +16,7 @@ class ResPartner(models.Model):
 
     rucName = fields.Char(string='Ruc Name', related='vat')
 
-    @api.constrains('vat')
+    @api.onchange('vat')
     def _get_ruc(self):
         _headers = {"Content-Type": "application/json",
                     "Accept": "application/json", "Catch-Control": "no-cache"}
