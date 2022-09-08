@@ -14,26 +14,22 @@ class ResPartner(models.Model):
     # inherit the model res.partner from l10n_latam_base
     _inherit = 'res.partner'
 
-    rucName = fields.Char(string='Ruc Name', related='vat')
-
     @api.onchange('vat')
     def _get_ruc(self):
-        _headers = {"Content-Type": "application/json",
-                    "Accept": "application/json", "Catch-Control": "no-cache"}
-        _url_base = "http://35.90.30.141:8888/padron-sunat/ec/gebr/"
-        _json_data = {}
-        _url_temp = _url_base + self.rucName
-        response = requests.post(
-            _url_temp, data=json.dumps(_json_data), headers=_headers)
-        _logger.info(json.dumps(response.json(), indent=4, sort_keys=True))
-        # update self.name with response.data.name
-        _logger.info(self.name)
-        if response.json()['data'] is not None:
-            self.name = response.json()['data']['nombreRazonSocial']
-            self.street_name = response.json()['data']['nombreVia'] + ' ' + response.json()['data']['numeroVia']
-            #self.env.cr.commit()
-        #write the response in the log
-        _logger.info(self.name)
+        _logger.info('=========================')
+        if (len(str(self.vat)) == 11):
+            _logger.info('=========================')
+            _logger.info('if')
+            _headers = {"Content-Type": "application/json",
+                        "Accept": "application/json", "Catch-Control": "no-cache"}
+            _url_base = "http://35.90.30.141:8888/padron-sunat/ec/gebr/"
+            _json_data = {}
+            response = requests.post(
+                _url_base+self.vat, data=json.dumps(_json_data), headers=_headers)
+            _logger.info(json.dumps(response.json(), indent=4, sort_keys=True))
+            respose_data = response.json().get('data')
+            self.name = respose_data.get('nombreRazonSocial')
+            self.street = respose_data.get("nombreVia")+respose_data.get("numero")+respose_data.get("tipoVia")
 
 
 """     @api.onchange('country_id')
