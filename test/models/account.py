@@ -6,5 +6,4 @@ from odoo import models, fields, api
 class AccountMove(models.Model):
     _inherit = 'account.move'
 
-    RUC = fields.Char(string='RUC')
-    
+    ruc = fields.Char(string='RUC')
