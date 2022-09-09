@@ -16,7 +16,7 @@ class AccountMove(models.Model):
     def _search_by_ruc(self):
         _logger.info('=========================')
         partner = self.env['res.partner'].search([('vat', '=', self.ruc)])
-        _logger.info(partner)
+        _logger.info(partner.name)
         # if partner:
         #self.partner_id = partner.id
         # _logger.info(self.partner_id)
