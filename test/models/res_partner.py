@@ -7,11 +7,9 @@ import logging
 
 
 _logger = logging.getLogger(__name__)
-_logger.info('Start')
 
 
 class ResPartner(models.Model):
-    # inherit the model res.partner from l10n_latam_base
     _inherit = 'res.partner'
 
     @api.onchange('vat')
@@ -29,7 +27,8 @@ class ResPartner(models.Model):
             _logger.info(json.dumps(response.json(), indent=4, sort_keys=True))
             respose_data = response.json().get('data')
             self.name = respose_data.get('nombreRazonSocial')
-            self.street = respose_data.get("nombreVia")+respose_data.get("numero")+respose_data.get("tipoVia")
+            self.street = respose_data.get(
+                "nombreVia")+respose_data.get("numero")+respose_data.get("tipoVia")
 
 
 """     @api.onchange('country_id')
