@@ -17,7 +17,9 @@ class AccountMove(models.Model):
         _logger.info('=========================')
         partner = self.env['res.partner'].search([('vat', '=', self.ruc)])
         _logger.info(partner)
-        if partner:
-            self.partner_id = partner.id
-        else:
-            self.partner_id = False
+        # if partner:
+        #self.partner_id = partner.id
+        # _logger.info(self.partner_id)
+        # else:
+        #self.partner_id = False
+        _logger.info(self.partner_id)
