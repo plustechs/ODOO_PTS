@@ -41,5 +41,11 @@ class AccountMove(models.Model):
                             'street2': result.data.interior,
                             'country_id': self.env['res.country'].search(
                                 [('name', '=', 'Peru')]).id,
+                            'l10n_latam_identification_type_id': self.env['l10n_latam.identification.type'].search(
+                                [('name', '=', 'RUC')]).id,
                             'company_type': _type_of_partner,
                         })
+                        _logger.info(self.env['res.country'].search(
+                                [('name', '=', 'Peru')]).id)
+                        _logger.info(self.env['l10n_latam.identification.type'].search(
+                                [('name', '=', 'RUC')]).id)
