@@ -35,9 +35,9 @@ class AccountMove(models.Model):
                     if result.data:
                         _logger.info(result.data)
                         self.partner_id = self.env['res.partner'].create({
-                            'name': result.data.nombreRazonSocial,
+                            'name': result.data.nombre_razon_social,
                             'vat': result.data.ruc,
-                            'street_name': result.data.tipoVia+" "+result.data.nombreVia+" "+result.data.numero,
+                            'street_name': result.data.tipo_via+" "+result.data.nombre_via+" "+result.data.numero,
                             'street2': result.data.interior,
                             'country_id': self.env['res.country'].search(
                                 [('name', '=', 'Peru')]).id
