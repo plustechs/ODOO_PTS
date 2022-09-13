@@ -32,7 +32,7 @@ class AccountMove(models.Model):
                     _logger.info('else')
                     response = ruc_fetch(self.ruc)
                     result = request_model_from_dict(
-                        json.loads(response.json()))
+                        json.loads(response))
                     _logger.info(result.data)
                     # self.partner_id = self.env['res.partner'].create(
                     #    {'name': 'Nuevo', 'vat': self.ruc}).id
