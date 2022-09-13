@@ -27,7 +27,7 @@ class AccountMove(models.Model):
             else:
                 _logger.info('else')
                 response = ruc_fetch(self.ruc)
-                result = request_model_from_dict(json.loads(response))
+                result = request_model_from_dict(json.loads(response.json()))
                 _logger.info(result.data)
                 #self.partner_id = self.env['res.partner'].create(
                 #    {'name': 'Nuevo', 'vat': self.ruc}).id
