@@ -150,7 +150,7 @@ class RequestModel:
 
     @staticmethod
     def from_dict(obj: Any) -> 'RequestModel':
-        assert isinstance(obj, dict)
+        assert isinstance(obj, dict)  # check if obj is a json dict
         response_code = from_union(
             [from_none, lambda x: int(from_str(x))], obj.get("responseCode"))
         error_list = from_union([lambda x: from_list(

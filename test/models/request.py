@@ -9,4 +9,5 @@ def ruc_fetch(ruc):
     _json_data = {}
     response = requests.post(
         _url_base+ruc, data=json.dumps(_json_data), headers=_headers)
-    return response
+
+    return json.dumps(response.json(), indent=4, sort_keys=True)

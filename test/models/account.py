@@ -5,7 +5,7 @@ from odoo import models, fields, api
 import logging
 
 from ..models.request import ruc_fetch
-from ..models.request_model import request_model_from_dict
+from ..models.request_model import RequestModel, request_model_from_dict
 
 
 _logger = logging.getLogger(__name__)
@@ -31,8 +31,14 @@ class AccountMove(models.Model):
                 else:
                     _logger.info('else')
                     response = ruc_fetch(self.ruc)
-                    _logger.info(response.json())
-                    #result = request_model_from_dict(response)
-                    #_logger.info(result.data)
-                    # self.partner_id = self.env['res.partner'].create(
-                    #    {'name': 'Nuevo', 'vat': self.ruc}).id
+                    result = request_model_from_dict(json.loads(response))
+                    if result.data:
+                        _logger.info(result.data)
+                        self.partner_id = self.env['res.partner'].create({
+                            'name': result.data.nombreRazonSocial,
+                            'vat': result.data.ruc,
+                            'street_name': result.data.tipoVia+" "+result.data.nombreVia+" "+result.data.numero,
+                            'street2': result.data.interior,
+                            'country_id': self.env['res.country'].search(
+                                [('name', '=', 'Peru')]).id
+                        })
