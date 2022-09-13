@@ -40,12 +40,15 @@ class AccountMove(models.Model):
                             'street_name': result.data.tipo_via+" "+result.data.nombre_via+" "+result.data.numero,
                             'street2': result.data.interior,
                             'country_id': self.env['res.country'].search(
-                                [('name', '=', 'Peru')]).id,
+                                [('code', '=', 'PE')]).id,
                             'l10n_latam_identification_type_id': self.env['l10n_latam.identification.type'].search(
                                 [('name', '=', 'RUC')]).id,
                             'company_type': _type_of_partner,
                         })
                         _logger.info(self.env['res.country'].search(
-                                [('name', '=', 'Peru')]).id)
+                                [('code', '=', 'PE')]).id)
                         _logger.info(self.env['l10n_latam.identification.type'].search(
                                 [('name', '=', 'RUC')]).id)
+                    else:
+                        _logger.info('No se encontró el RUC')
+                        self.partner_id = False
