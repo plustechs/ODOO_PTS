@@ -17,29 +17,31 @@ class ResPartner(models.Model):
     @api.onchange('vat')
     def _get_ruc(self):
         _logger.info('=========================')
-        if (len(str(self.vat)) == 11):
-            _logger.info('=========================')
-            _logger.info('if')
-            _headers = {"Content-Type": "application/json",
-                        "Accept": "application/json", "Catch-Control": "no-cache"}
-            _url_base = "http://35.90.30.141:8888/padron-sunat/ec/gebr/"
-            _json_data = {}
-            response = requests.post(
-                _url_base+self.vat, data=json.dumps(_json_data), headers=_headers)
-            _logger.info(json.dumps(response.json(), indent=4, sort_keys=True))
-            #respose_data = response.json().get('data')
-            result = request_model_from_dict(json.loads(response))
-            _logger.info(result.data)
-            """ self.name = respose_data.get('nombreRazonSocial')
-            street_build = respose_data.get('tipoVia')+" "+respose_data.get(
-                'nombreVia')+" "+respose_data.get('numeroVia')
-            self.street_name = street_build
-            self.street2 = respose_data.get('interior')
-            self.zip = respose_data.get('codigoPostal')
-            self.state_id = self.env['res.country.state'].search(
-                [('name', '=', respose_data.get('provincia'))]).id
-            self.country_id = self.env['res.country'].search(
-                [('name', '=', 'Peru')]).id """
+        if (type(self.vat) is str):
+            _logger.info('str')
+            if(self.vat.isdigit() and len(self.vat) == 11):
+                _logger.info('=========================')
+                _logger.info('if')
+                _headers = {"Content-Type": "application/json",
+                            "Accept": "application/json", "Catch-Control": "no-cache"}
+                _url_base = "http://35.90.30.141:8888/padron-sunat/ec/gebr/"
+                _json_data = {}
+                response = requests.post(
+                    _url_base+self.vat, data=json.dumps(_json_data), headers=_headers)
+                _logger.info(json.dumps(response.json(), indent=4, sort_keys=True))
+                #respose_data = response.json().get('data')
+                result = request_model_from_dict(json.loads(response))
+                _logger.info(result.data)
+                """ self.name = respose_data.get('nombreRazonSocial')
+                street_build = respose_data.get('tipoVia')+" "+respose_data.get(
+                    'nombreVia')+" "+respose_data.get('numeroVia')
+                self.street_name = street_build
+                self.street2 = respose_data.get('interior')
+                self.zip = respose_data.get('codigoPostal')
+                self.state_id = self.env['res.country.state'].search(
+                    [('name', '=', respose_data.get('provincia'))]).id
+                self.country_id = self.env['res.country'].search(
+                    [('name', '=', 'Peru')]).id """
 
 
 """     @api.onchange('country_id')
