@@ -18,16 +18,21 @@ class AccountMove(models.Model):
 
     @api.onchange('ruc')
     def _search_by_ruc(self):
-        if(len(str(self.ruc)) == 11):
-            _logger.info('=========================')
-            partner = self.env['res.partner'].search([('vat', '=', self.ruc)])
-            if partner:
-                _logger.info(partner.name)
-                self.partner_id = partner.id
-            else:
-                _logger.info('else')
-                response = ruc_fetch(self.ruc)
-                result = request_model_from_dict(json.loads(response.json()))
-                _logger.info(result.data)
-                #self.partner_id = self.env['res.partner'].create(
-                #    {'name': 'Nuevo', 'vat': self.ruc}).id
+        _logger.info('=========================')
+        if (type(self.vat) is str):
+            _logger.info('str')
+            if (self.vat.isdigit() and len(self.vat) == 11):
+                _logger.info('=========================')
+                partner = self.env['res.partner'].search(
+                    [('vat', '=', self.ruc)])
+                if partner:
+                    _logger.info(partner.name)
+                    self.partner_id = partner.id
+                else:
+                    _logger.info('else')
+                    response = ruc_fetch(self.ruc)
+                    result = request_model_from_dict(
+                        json.loads(response.json()))
+                    _logger.info(result.data)
+                    # self.partner_id = self.env['res.partner'].create(
+                    #    {'name': 'Nuevo', 'vat': self.ruc}).id
