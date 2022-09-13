@@ -19,9 +19,9 @@ class AccountMove(models.Model):
     @api.onchange('ruc')
     def _search_by_ruc(self):
         _logger.info('=========================')
-        if (type(self.vat) is str):
+        if (type(self.ruc) is str):
             _logger.info('str')
-            if (self.vat.isdigit() and len(self.vat) == 11):
+            if (self.ruc.isdigit() and len(self.ruc) == 11):
                 _logger.info('=========================')
                 partner = self.env['res.partner'].search(
                     [('vat', '=', self.ruc)])
