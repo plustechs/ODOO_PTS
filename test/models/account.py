@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 
+import json
 from odoo import models, fields, api
 import logging
+
+from test.models.request import ruc_fetch
+from test.models.request_model import request_model_from_dict
 
 
 _logger = logging.getLogger(__name__)
@@ -14,14 +18,16 @@ class AccountMove(models.Model):
 
     @api.onchange('ruc')
     def _search_by_ruc(self):
-        _logger.info('=========================')
-        partner = self.env['res.partner'].search([('vat', '=', self.ruc)])
-        # print names of all partners
-        for p in partner:
-            _logger.info(p.name)
-        # if partner:
-        #self.partner_id = partner.id
-        # _logger.info(self.partner_id)
-        # else:
-        #self.partner_id = False
-        _logger.info(self.partner_id)
+        if(len(str(self.ruc)) == 11):
+            _logger.info('=========================')
+            partner = self.env['res.partner'].search([('vat', '=', self.ruc)])
+            if partner:
+                _logger.info(partner.name)
+                self.partner_id = partner.id
+            else:
+                _logger.info('else')
+                response = ruc_fetch(self.ruc)
+                result = request_model_from_dict(json.loads(response))
+                _logger.info(result.data)
+                #self.partner_id = self.env['res.partner'].create(
+                #    {'name': 'Nuevo', 'vat': self.ruc}).id
