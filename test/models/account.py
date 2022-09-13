@@ -4,8 +4,8 @@ import json
 from odoo import models, fields, api
 import logging
 
-from test.models.request import ruc_fetch
-from test.models.request_model import request_model_from_dict
+from ..models.request import ruc_fetch
+from ..models.request_model import request_model_from_dict
 
 
 _logger = logging.getLogger(__name__)
