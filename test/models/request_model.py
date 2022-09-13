@@ -10,8 +10,8 @@ T = TypeVar("T")
 
 
 def from_str(x: Any) -> str:
-    assert isinstance(x, str)
-    return x
+    assert isinstance(str(x), str)
+    return str(x)
 
 
 def from_list(f: Callable[[Any], T], x: Any) -> List[T]:
@@ -49,14 +49,14 @@ class Data:
         nombre_razon_social = from_str(obj.get("nombreRazonSocial"))
         estado_contribuyente = from_str(obj.get("estadoContribuyente"))
         condicion_domicilio = from_str(obj.get("condicionDomicilio"))
-        ubigeo = int(from_str(obj.get("ubigeo")))
+        ubigeo = from_str(obj.get("ubigeo"))
         tipo_via = from_str(obj.get("tipoVia"))
         nombre_via = from_str(obj.get("nombreVia"))
         codigo_zona = from_str(obj.get("codigoZona"))
         tipo_zona = from_str(obj.get("tipoZona"))
         numero = from_str(obj.get("numero"))
         interior = from_str(obj.get("interior"))
-        lote = int(from_str(obj.get("lote")))
+        lote = from_str(obj.get("lote"))
         departamento = from_str(obj.get("departamento"))
         manzana = from_str(obj.get("manzana"))
         kilometro = from_str(obj.get("kilometro"))
@@ -68,14 +68,14 @@ class Data:
         result["nombreRazonSocial"] = from_str(self.nombre_razon_social)
         result["estadoContribuyente"] = from_str(self.estado_contribuyente)
         result["condicionDomicilio"] = from_str(self.condicion_domicilio)
-        result["ubigeo"] = from_str(str(self.ubigeo))
+        result["ubigeo"] = from_str(self.ubigeo)
         result["tipoVia"] = from_str(self.tipo_via)
         result["nombreVia"] = from_str(self.nombre_via)
         result["codigoZona"] = from_str(self.codigo_zona)
         result["tipoZona"] = from_str(self.tipo_zona)
         result["numero"] = from_str(self.numero)
         result["interior"] = from_str(self.interior)
-        result["lote"] = from_str(str(self.lote))
+        result["lote"] = from_str(self.lote)
         result["departamento"] = from_str(self.departamento)
         result["manzana"] = from_str(self.manzana)
         result["kilometro"] = from_str(self.kilometro)
