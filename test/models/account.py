@@ -29,16 +29,17 @@ class AccountMove(models.Model):
                     _logger.info(partner.name)
                     self.partner_id = partner.id
                 else:
-                    _logger.info('else')
                     response = ruc_fetch(self.ruc)
                     result = request_model_from_dict(json.loads(response))
                     if result.data:
+                        _type_of_partner = 'person' if self.ruc[0] == '1' else 'company'
                         _logger.info(result.data)
                         self.partner_id = self.env['res.partner'].create({
                             'name': result.data.nombre_razon_social,
-                            'vat': result.data.ruc,
+                            'vat': self.ruc,
                             'street_name': result.data.tipo_via+" "+result.data.nombre_via+" "+result.data.numero,
                             'street2': result.data.interior,
                             'country_id': self.env['res.country'].search(
-                                [('name', '=', 'Peru')]).id
+                                [('name', '=', 'Peru')]).id,
+                            'company_type': _type_of_partner,
                         })
