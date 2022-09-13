@@ -9,11 +9,6 @@ from typing import Any, List, TypeVar, Callable, Type, cast
 T = TypeVar("T")
 
 
-def from_int(x: Any) -> int:
-    assert isinstance(x, int) and not isinstance(x, bool)
-    return x
-
-
 def from_str(x: Any) -> str:
     assert isinstance(x, str)
     return x
@@ -31,18 +26,18 @@ def to_class(c: Type[T], x: Any) -> dict:
 
 @dataclass
 class Data:
-    ruc: int
+    ruc: str
     nombre_razon_social: str
     estado_contribuyente: str
     condicion_domicilio: str
-    ubigeo: int
+    ubigeo: str
     tipo_via: str
     nombre_via: str
     codigo_zona: str
     tipo_zona: str
     numero: str
     interior: str
-    lote: int
+    lote: str
     departamento: str
     manzana: str
     kilometro: str
@@ -50,7 +45,7 @@ class Data:
     @staticmethod
     def from_dict(obj: Any) -> 'Data':
         assert isinstance(obj, dict)
-        ruc = from_int(obj.get("ruc"))
+        ruc = from_str(obj.get("ruc"))
         nombre_razon_social = from_str(obj.get("nombreRazonSocial"))
         estado_contribuyente = from_str(obj.get("estadoContribuyente"))
         condicion_domicilio = from_str(obj.get("condicionDomicilio"))
@@ -69,7 +64,7 @@ class Data:
 
     def to_dict(self) -> dict:
         result: dict = {}
-        result["ruc"] = from_int(self.ruc)
+        result["ruc"] = from_str(self.ruc)
         result["nombreRazonSocial"] = from_str(self.nombre_razon_social)
         result["estadoContribuyente"] = from_str(self.estado_contribuyente)
         result["condicionDomicilio"] = from_str(self.condicion_domicilio)
