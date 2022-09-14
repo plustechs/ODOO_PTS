@@ -3,7 +3,7 @@
 # result = request_model_from_dict(json.loads(json_string)) (load)
 
 from dataclasses import dataclass
-from typing import Any, List, TypeVar, Callable, Type, cast
+from typing import Any, List, TypeVar, Callable, Type, cast, Optional
 
 
 T = TypeVar("T")
@@ -95,8 +95,8 @@ class Data:
 class RequestModel:
     response_code: int
     error_list: List[Any]
-    data: Data
     message_errors: str
+    data: Optional[Data] = None
 
     @staticmethod
     def from_dict(obj: Any) -> 'RequestModel':
@@ -105,15 +105,15 @@ class RequestModel:
         error_list = from_list(lambda x: x, obj.get("errorList"))
         data = from_union([Data.from_dict, from_none], obj.get("data"))
         message_errors = str(obj.get("messageErrors"))
-        return RequestModel(response_code, error_list, data, message_errors)
+        return RequestModel(response_code, error_list, message_errors, data)
 
     def to_dict(self) -> dict:
         result: dict = {}
         result["responseCode"] = str(self.response_code)
         result["errorList"] = from_list(lambda x: x, self.error_list)
+        result["messageErrors"] = str(self.message_errors)
         result["data"] = from_union(
             [lambda x: to_class(Data, x), from_none], self.data)
-        result["messageErrors"] = str(self.message_errors)
         return result
 
 
